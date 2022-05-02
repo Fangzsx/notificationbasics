@@ -20,10 +20,18 @@
         android:textColorHint="#757575" />
 
     <Button
-        android:id="@+id/btn_submit_btn"
+        android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="submit" />
+        android:text="ihatag" />
+
+<Button
+        android:id="@+id/btn_dismiss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+         android:backgroundTint="#B33030"
+        android:text="dulaon ang notif" />
 
 </LinearLayout>
