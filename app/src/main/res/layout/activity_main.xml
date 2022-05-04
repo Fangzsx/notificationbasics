@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-    android:gravity="center"
     android:padding="30dp">
 
     <EditText
@@ -24,14 +23,70 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="ihatag" />
+        android:text="ipasa" />
 
-<Button
+    <Button
         android:id="@+id/btn_dismiss"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
          android:backgroundTint="#B33030"
+        android:layout_marginBottom="30dp"
         android:text="dulaon ang notif" />
+    
+    <LinearLayout
+        android:id="@+id/ll_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@android:color/holo_blue_bright"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/clock"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/circle_bg"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_mid"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:id="@+id/ll_left"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical|start"
+            android:orientation="horizontal"
+            android:background="@android:color/holo_green_dark"
+            android:layout_weight="1"/>
+        <LinearLayout
+            android:id="@+id/ll_right"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical|end"
+            android:background="@android:color/holo_orange_dark"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:background="@android:color/holo_red_light"
+        android:orientation="horizontal"/>
+
+    
 
 </LinearLayout>
