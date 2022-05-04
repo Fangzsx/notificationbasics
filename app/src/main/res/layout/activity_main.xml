@@ -65,6 +65,7 @@
             android:id="@+id/ll_left"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:tag="left"
             android:gravity="center_vertical|start"
             android:orientation="horizontal"
             android:background="@android:color/holo_green_dark"
@@ -74,6 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:tag="right"
             android:gravity="center_vertical|end"
             android:background="@android:color/holo_orange_dark"
             android:layout_weight="1"/>
@@ -81,6 +83,8 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:tag="bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

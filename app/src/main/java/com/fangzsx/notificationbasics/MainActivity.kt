@@ -9,6 +9,7 @@ import android.content.ClipDescription
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.DragEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -68,11 +69,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.clock.setOnLongClickListener {
             val parent  = binding.clock.parent as LinearLayout
-            val clipClockPosition : String = parent.tag.toString()
-            Toast.makeText(this, clipClockPosition, Toast.LENGTH_SHORT).show()
-            val item = ClipData.Item(clipClockPosition)
+            val clockStartPosition : String = parent.tag.toString()
+            val item = ClipData.Item(clockStartPosition)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
-            val data = ClipData(clipClockPosition, mimeTypes, item)
+            val data = ClipData(clockStartPosition, mimeTypes, item)
 
             val dragShadowBuilder = View.DragShadowBuilder(it)
             it.startDragAndDrop(data, dragShadowBuilder, it, 0)
@@ -80,6 +80,57 @@ class MainActivity : AppCompatActivity() {
             it.visibility = View.INVISIBLE
             true
         }
+
+
+        val dragListener = View.OnDragListener { view, event ->
+            when(event.action){
+                DragEvent.ACTION_DRAG_STARTED -> {
+                    event.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
+                }
+                DragEvent.ACTION_DRAG_ENTERED -> {
+                    view.invalidate()
+                    true
+                }
+                DragEvent.ACTION_DRAG_LOCATION -> {
+                    true
+                }
+                DragEvent.ACTION_DRAG_EXITED -> {
+                    view.invalidate()
+                    true
+                }
+                DragEvent.ACTION_DROP -> {
+                    val item = event.clipData.getItemAt(0)
+                    val from = item.text
+
+                    view.invalidate()
+
+                    //current drag view
+                    val dragView = event.localState as View
+
+                    val owner = dragView.parent as ViewGroup
+                    owner.removeView(dragView)
+
+                    val destination = view as LinearLayout
+                    destination.addView(dragView)
+                    dragView.visibility = View.VISIBLE
+
+                    Toast.makeText(this, "From : $from To: ${destination.tag}", Toast.LENGTH_SHORT).show()
+                    true
+                }
+
+                DragEvent.ACTION_DRAG_ENDED -> {
+                    view.invalidate()
+                    true
+                }
+
+                else -> false
+            }
+        }
+
+        binding.llTop.setOnDragListener(dragListener)
+        binding.llBottom.setOnDragListener(dragListener)
+        binding.llLeft.setOnDragListener(dragListener)
+        binding.llRight.setOnDragListener(dragListener)
 
     }
 
