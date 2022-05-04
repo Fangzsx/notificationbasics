@@ -4,9 +4,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
+import android.content.ClipData
+import android.content.ClipDescription
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -59,6 +64,21 @@ class MainActivity : AppCompatActivity() {
         binding.btnDismiss.setOnClickListener {
             notificationManager.cancel(NOTIFICATION_ID)
             Snackbar.make(binding.root, "Notification Dismissed!", Snackbar.LENGTH_SHORT).show()
+        }
+
+        binding.clock.setOnLongClickListener {
+            val parent  = binding.clock.parent as LinearLayout
+            val clipClockPosition : String = parent.tag.toString()
+            Toast.makeText(this, clipClockPosition, Toast.LENGTH_SHORT).show()
+            val item = ClipData.Item(clipClockPosition)
+            val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
+            val data = ClipData(clipClockPosition, mimeTypes, item)
+
+            val dragShadowBuilder = View.DragShadowBuilder(it)
+            it.startDragAndDrop(data, dragShadowBuilder, it, 0)
+
+            it.visibility = View.INVISIBLE
+            true
         }
 
     }
